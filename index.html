@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quantum Nexus - Elevating Tomorrow's Digital Frontier</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts - Inter for modern typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Define Tiffany-inspired colors */
+        :root {
+            --tiffany-blue: #0ACDCD; /* Main Tiffany Blue */
+            --tiffany-blue-dark: #079A9A; /* Darker shade for backgrounds/hovers */
+            --tiffany-blue-darker: #057B7B; /* Even darker for strong contrasts */
+            --tiffany-light-teal: #4DE3E3; /* Lighter, more vibrant teal */
+            --tiffany-light-gray-blue: #A8DADC; /* A very light, muted blue for secondary accents */
+            --tiffany-muted-grey: #9CA3AF; /* For icons that were red/green */
+        }
+
+        /* Custom CSS for subtle overrides and specific effects */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0d1117; /* Deep dark blue-grey */
+            color: #e0e6ed; /* Light grey for text */
+            overflow-x: hidden; /* Prevent horizontal scroll on small devices */
+        }
+
+        /* Subtle background particle effect (conceptual, can be refined with JS particles) */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at top left, rgba(10, 205, 205, 0.05), transparent 30%), /* Tiffany blue glow */
+                        radial-gradient(circle at bottom right, rgba(77, 227, 227, 0.05), transparent 30%); /* Lighter teal glow */
+            z-index: -1;
+            pointer-events: none; /* Ensure no interaction with this layer */
+            animation: gradient-shift 10s ease infinite alternate;
+        }
+
+        @keyframes gradient-shift {
+            0% { background-position: 0% 0%; }
+            100% { background-position: 100% 100%; }
+        }
+
+
+        /* Hero section specific styles for gradients and clip-path */
+        .hero-section {
+            background: linear-gradient(135deg, #0d1117 0%, #1a202c 100%);
+        }
+
+        /* Glassmorphism effect */
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Neon glow for text and buttons */
+        .neon-text {
+            text-shadow: 0 0 5px var(--tiffany-blue), 0 0 10px var(--tiffany-blue), 0 0 15px var(--tiffany-blue), 0 0 20px var(--tiffany-blue);
+        }
+
+        .neon-button {
+            position: relative;
+            z-index: 1;
+            transition: all 0.3s ease-in-out;
+            box-shadow: 0 0 8px rgba(10, 205, 205, 0.7); /* Tiffany blue shadow */
+            overflow: hidden; /* For pseudo-element effects */
+        }
+        .neon-button::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(10, 205, 205, 0.3); /* Tiffany blue hover glow */
+            border-radius: 50%;
+            transition: width 0.4s ease-out, height 0.4s ease-out, top 0.4s ease-out, left 0.4s ease-out;
+            transform: translate(-50%, -50%);
+            z-index: -1;
+            opacity: 0;
+        }
+        .neon-button:hover {
+            box-shadow: 0 0 15px var(--tiffany-blue), 0 0 25px rgba(10, 205, 205, 0.8), 0 0 40px rgba(10, 205, 205, 0.5); /* Stronger Tiffany blue shadow */
+            transform: translateY(-3px) scale(1.02);
+        }
+        .neon-button:hover::before {
+            width: 200%;
+            height: 200%;
+            opacity: 1;
+        }
+
+        /* Subtle animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-in {
+            animation: fadeIn 1s ease-out forwards;
+        }
+        /* Staggered animation delays */
+        .delay-100 { animation-delay: 0.1s; }
+        .delay-200 { animation-delay: 0.2s; }
+        .delay-300 { animation-delay: 0.3s; }
+        .delay-400 { animation-delay: 0.4s; }
+        .delay-500 { animation-delay: 0.5s; }
+
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.03); opacity: 0.95; }
+        }
+        .animate-pulse-subtle {
+            animation: pulse 3s infinite ease-in-out;
+        }
+
+        /* Typing effect for AI output */
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: var(--tiffany-blue); } /* Tiffany blue caret */
+        }
+        .typewriter {
+            overflow: hidden; /* Ensures the text is hidden until typed */
+            white-space: nowrap; /* Keeps the content on a single line */
+            border-right: .15em solid var(--tiffany-blue); /* The blinking caret */
+            animation:
+                typing 3s steps(40, end),
+                blink-caret .75s step-end infinite;
+        }
+
+        /* Custom scrollbar for a sleek look */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #1a202c;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--tiffany-blue); /* Tiffany blue */
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--tiffany-blue-dark);
+        }
+
+        /* Three.js canvas specific styling */
+        #three-canvas {
+            width: 100%;
+            height: 60vh; /* Adjust height as needed */
+            background-color: transparent; /* Make sure it's transparent to show background */
+            display: block;
+            touch-action: none; /* Prevent browser touch actions on canvas */
+            cursor: grab; /* Indicate it's draggable */
+        }
+        #three-canvas:active {
+            cursor: grabbing;
+        }
+
+        /* Back to top button */
+        #back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: rgba(10, 205, 205, 0.7); /* Tiffany blue rgba */
+            color: white;
+            padding: 12px 15px;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            display: none; /* Hidden by default */
+            z-index: 1000;
+            box-shadow: 0 0 10px rgba(10, 205, 205, 0.5); /* Tiffany blue shadow */
+            transition: all 0.3s ease;
+        }
+        #back-to-top:hover {
+            background-color: rgba(10, 205, 205, 0.9); /* Tiffany blue rgba darker */
+            transform: translateY(-3px);
+            box-shadow: 0 0 15px rgba(10, 205, 205, 0.8); /* Stronger Tiffany blue shadow */
+        }
+    </style>
+</head>
+<body class="antialiased leading-relaxed text-gray-200">
+
+    <!-- Header / Navigation -->
+    <header class="fixed top-0 left-0 w-full z-50 p-4 bg-gradient-to-b from-gray-900/80 to-transparent">
+        <nav class="container mx-auto flex justify-between items-center">
+            <div class="text-2xl font-bold neon-text">Quantum Nexus</div>
+            <ul class="hidden md:flex space-x-6">
+                <li><a href="#home" class="hover:text-[--tiffany-light-teal] transition-colors duration-300">Home</a></li>
+                <li><a href="#about" class="hover:text-[--tiffany-light-teal] transition-colors duration-300">About</a></li>
+                <li><a href="#ai-lab" class="hover:text-[--tiffany-light-teal] transition-colors duration-300">AI Lab</a></li>
+                <li><a href="#3d-experience" class="hover:text-[--tiffany-light-teal] transition-colors duration-300">3D Experience</a></li>
+                <li><a href="#contact" class="hover:text-[--tiffany-light-teal] transition-colors duration-300">Contact</a></li>
+            </ul>
+            <button class="md:hidden text-[--tiffany-light-teal] focus:outline-none" aria-label="Open menu">
+                <i class="fas fa-bars text-xl"></i>
+            </button>
+        </nav>
+    </header>
+
+    <!-- Mobile Menu Overlay (Hidden by default) -->
+    <div id="mobile-menu" class="fixed inset-0 bg-gray-900/95 z-40 hidden flex-col items-center justify-center space-y-8 text-xl">
+        <button class="absolute top-4 right-4 text-[--tiffany-light-teal] focus:outline-none" aria-label="Close menu">
+            <i class="fas fa-times"></i>
+        </button>
+        <a href="#home" class="hover:text-[--tiffany-light-teal] transition-colors duration-300" onclick="document.getElementById('mobile-menu').classList.add('hidden')">Home</a>
+        <a href="#about" class="hover:text-[--tiffany-light-teal] transition-colors duration-300" onclick="document.getElementById('mobile-menu').classList.add('hidden')">About</a>
+        <a href="#ai-lab" class="hover:text-[--tiffany-light-teal] transition-colors duration-300" onclick="document.getElementById('mobile-menu').classList.add('hidden')">AI Lab</a>
+        <a href="#3d-experience" class="hover:text-[--tiffany-light-teal] transition-colors duration-300" onclick="document.getElementById('mobile-menu').classList.add('hidden')">3D Experience</a>
+        <a href="#contact" class="hover:text-[--tiffany-light-teal] transition-colors duration-300" onclick="document.getElementById('mobile-menu').classList.add('hidden')">Contact</a>
+    </div>
+
+    <main class="pt-16">
+        <!-- Hero Section -->
+        <section id="home" class="hero-section min-h-screen flex items-center justify-center text-center p-8 relative overflow-hidden">
+            <div class="relative z-10 max-w-4xl animate-fade-in">
+                <h1 class="text-5xl md:text-7xl font-extrabold mb-4 leading-tight neon-text animate-pulse-subtle delay-100">
+                    Elevating Tomorrow's Digital Frontier
+                </h1>
+                <p class="text-lg md:text-xl mb-8 text-gray-300 delay-200">
+                    Pioneering the next generation of intelligent systems, immersive experiences, and data synthesis.
+                </p>
+                <a href="#ai-lab" class="neon-button inline-block bg-[--tiffany-blue-dark] hover:bg-[--tiffany-blue-darker] text-white font-bold py-3 px-8 rounded-full shadow-lg transition-all duration-300 transform hover:scale-105 delay-300">
+                    Explore Our Innovations <i class="fas fa-arrow-right ml-2"></i>
+                </a>
+            </div>
+            <!-- Background futuristic particles/mesh (conceptual, could be Three.js) -->
+            <div class="absolute inset-0 z-0 opacity-10">
+                <div class="absolute w-64 h-64 rounded-full bg-[--tiffany-blue] blur-3xl opacity-50 top-1/4 left-1/4 animate-pulse"></div>
+                <div class="absolute w-96 h-96 rounded-full bg-[--tiffany-light-teal] blur-3xl opacity-50 bottom-1/4 right-1/4 animate-pulse animation-delay-2000"></div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="py-20 px-4 md:px-8 bg-gray-900 section-fade-in">
+            <div class="container mx-auto max-w-4xl text-center">
+                <h2 class="text-4xl font-bold mb-8 neon-text delay-100">Our Vision for 2026 and Beyond</h2>
+                <div class="grid md:grid-cols-2 gap-10">
+                    <div class="glass-panel p-8 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:translate-y-[-5px] delay-200">
+                        <i class="fas fa-brain text-5xl text-[--tiffany-blue] mb-4"></i>
+                        <h3 class="text-2xl font-semibold mb-3">Intelligent Systems</h3>
+                        <p class="text-gray-300 leading-relaxed">
+                            Developing self-optimizing AI models that redefine efficiency and personalized interaction, driving breakthroughs in every sector.
+                        </p>
+                    </div>
+                    <div class="glass-panel p-8 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:translate-y-[-5px] delay-300">
+                        <i class="fas fa-vr-cardboard text-5xl text-[--tiffany-light-teal] mb-4"></i>
+                        <h3 class="text-2xl font-semibold mb-3">Immersive Realities</h3>
+                        <p class="text-gray-300 leading-relaxed">
+                            Crafting hyper-realistic virtual and augmented environments for unparalleled experiences in gaming, education, and collaboration.
+                        </p>
+                    </div>
+                    <div class="glass-panel p-8 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:translate-y-[-5px] delay-400">
+                        <i class="fas fa-chart-line text-5xl text-[--tiffany-light-gray-blue] mb-4"></i>
+                        <h3 class="text-2xl font-semibold mb-3">Predictive Analytics</h3>
+                        <p class="text-gray-300 leading-relaxed">
+                            Leveraging quantum-scale data processing to uncover insights, predict trends, and empower smarter decision-making.
+                        </p>
+                    </div>
+                    <div class="glass-panel p-8 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:translate-y-[-5px] delay-500">
+                        <i class="fas fa-shield-alt text-5xl text-[--tiffany-muted-grey] mb-4"></i>
+                        <h3 class="text-2xl font-semibold mb-3">Secure Architectures</h3>
+                        <p class="text-gray-300 leading-relaxed">
+                            Building resilient, unbreachable digital infrastructures safeguarding privacy and integrity in an interconnected world.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- AI Lab Section - Gemini API Integration -->
+        <section id="ai-lab" class="py-20 px-4 md:px-8 bg-gray-950 section-fade-in">
+            <div class="container mx-auto max-w-3xl">
+                <h2 class="text-4xl font-bold text-center mb-12 neon-text delay-100">The AI Lab: A Glimpse into Sentience</h2>
+                <div class="glass-panel p-8 rounded-xl shadow-lg delay-200">
+                    <p class="text-gray-300 mb-6 text-center">
+                        Interact with our prototype conversational AI, powered by a future iteration of the Gemini model. Ask it anything!
+                    </p>
+                    <div class="mb-6">
+                        <label for="ai-prompt" class="block text-lg font-medium text-[--tiffany-light-teal] mb-2">Your Query:</label>
+                        <textarea id="ai-prompt" rows="3" class="w-full p-4 rounded-lg bg-gray-800 border border-gray-700 text-gray-100 focus:ring-[--tiffany-blue] focus:border-[--tiffany-blue] outline-none transition-all duration-200" placeholder="e.g., What are the ethical implications of advanced AI?"></textarea>
+                    </div>
+                    <button id="generate-ai-response" class="neon-button w-full bg-[--tiffany-blue-dark] hover:bg-[--tiffany-blue-darker] text-white font-bold py-3 px-6 rounded-lg shadow-md transition-all duration-300">
+                        Generate AI Response <i class="fas fa-robot ml-2"></i>
+                    </button>
+                    <div id="ai-response-area" class="mt-8 p-6 bg-gray-800 rounded-xl border border-gray-700 min-h-[100px] relative">
+                        <p id="ai-output" class="text-gray-200 italic">AI response will appear here...</p>
+                        <div id="ai-loading" class="absolute inset-0 flex items-center justify-center bg-gray-800/80 hidden">
+                            <i class="fas fa-spinner fa-spin text-4xl text-[--tiffany-light-teal]"></i>
+                            <span class="ml-3 text-[--tiffany-light-teal] text-lg">Thinking...</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3D Experience Section - Three.js Integration -->
+        <section id="3d-experience" class="py-20 px-4 md:px-8 bg-gray-900 section-fade-in">
+            <div class="container mx-auto text-center">
+                <h2 class="text-4xl font-bold mb-8 neon-text delay-100">Immersive 3D Simulations</h2>
+                <p class="text-lg text-gray-300 mb-10 max-w-2xl mx-auto delay-200">
+                    Experience interactive 3D visualizations built with Three.js. Drag to rotate the object and explore.
+                </p>
+                <div class="glass-panel p-2 rounded-xl shadow-lg relative aspect-video delay-300" style="height: 60vh;">
+                    <canvas id="three-canvas" class="rounded-lg"></canvas>
+                    <div class="absolute bottom-4 left-0 right-0 text-center text-gray-400 text-sm">
+                        Drag your mouse across the canvas to rotate the 3D object.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer id="contact" class="bg-gray-950 py-12 px-4 md:px-8 border-t border-gray-800 section-fade-in">
+            <div class="container mx-auto flex flex-col md:flex-row justify-between items-center text-center md:text-left">
+                <div class="mb-6 md:mb-0 delay-100">
+                    <h3 class="text-2xl font-bold neon-text mb-2">Quantum Nexus</h3>
+                    <p class="text-gray-400">&copy; 2026 All Rights Reserved.</p>
+                </div>
+                <div class="mb-6 md:mb-0 delay-200">
+                    <h4 class="text-xl font-semibold text-[--tiffany-light-teal] mb-3">Connect With Us</h4>
+                    <div class="flex justify-center md:justify-start space-x-6">
+                        <a href="#" class="text-gray-400 hover:text-[--tiffany-light-teal] transition-colors duration-300"><i class="fab fa-twitter text-2xl"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-[--tiffany-light-teal] transition-colors duration-300"><i class="fab fa-linkedin-in text-2xl"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-[--tiffany-light-teal] transition-colors duration-300"><i class="fab fa-github text-2xl"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-[--tiffany-light-teal] transition-colors duration-300"><i class="fas fa-envelope text-2xl"></i></a>
+                    </div>
+                </div>
+                <div class="delay-300">
+                    <h4 class="text-xl font-semibold text-[--tiffany-light-teal] mb-3">Legal</h4>
+                    <ul>
+                        <li><a href="#" class="text-gray-400 hover:text-[--tiffany-light-teal] transition-colors duration-300">Privacy Policy</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-[--tiffany-light-teal] transition-colors duration-300">Terms of Service</a></li>
+                    </ul>
+                </div>
+            </div>
+        </footer>
+    </main>
+
+    <!-- Back to top button -->
+    <button id="back-to-top" title="Back to top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- Three.js Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script>
+        // --- Mobile Menu Toggle ---
+        document.querySelector('header button').addEventListener('click', () => {
+            document.getElementById('mobile-menu').classList.remove('hidden');
+        });
+        document.getElementById('mobile-menu').querySelector('button').addEventListener('click', () => {
+            document.getElementById('mobile-menu').classList.add('hidden');
+        });
+
+        // --- Smooth Scrolling for Navigation ---
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // --- Section Fade-in Animation on Scroll ---
+        const faders = document.querySelectorAll('.section-fade-in');
+        const appearOptions = {
+            threshold: 0.2, // When 20% of the section is visible
+            rootMargin: "0px 0px -50px 0px" // Start animating slightly before it's fully in view
+        };
+
+        const appearOnScroll = new IntersectionObserver(function(entries, appearOnScroll) {
+            entries.forEach(entry => {
+                if (!entry.isIntersecting) {
+                    return;
+                } else {
+                    entry.target.classList.add('animate-fade-in');
+                    // Find all direct children of the target that have delay classes and add animation
+                    Array.from(entry.target.children).forEach(child => {
+                        Array.from(child.children).forEach(grandchild => {
+                            if (grandchild.classList.contains('delay-100') || grandchild.classList.contains('delay-200') || grandchild.classList.contains('delay-300') || grandchild.classList.contains('delay-400') || grandchild.classList.contains('delay-500')) {
+                                grandchild.classList.add('animate-fade-in');
+                            }
+                        });
+                    });
+                    appearOnScroll.unobserve(entry.target); // Stop observing once animated
+                }
+            });
+        }, appearOptions);
+
+        faders.forEach(fader => {
+            appearOnScroll.observe(fader);
+        });
+
+
+        // --- Three.js 3D Experience Setup ---
+        window.onload = function() {
+            const canvas = document.getElementById('three-canvas');
+            const scene = new THREE.Scene();
+            const camera = new THREE.PerspectiveCamera(75, canvas.clientWidth / canvas.clientHeight, 0.1, 1000);
+            const renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, alpha: true });
+            renderer.setPixelRatio(window.devicePixelRatio);
+            renderer.setSize(canvas.clientWidth, canvas.clientHeight);
+
+            // Add subtle grid helper for futuristic feel
+            const gridHelper = new THREE.GridHelper(10, 10, 0x0ACDCD, 0x056A6A); /* Tiffany blue colors */
+            scene.add(gridHelper);
+            gridHelper.position.y = -2; // Position it below the object
+            gridHelper.material.opacity = 0.3;
+            gridHelper.material.transparent = true;
+
+            // Add some lighting
+            const ambientLight = new THREE.AmbientLight(0x404040, 0.6); // Softer ambient light
+            scene.add(ambientLight);
+            const directionalLight = new THREE.DirectionalLight(0x0ACDCD, 0.8); /* Tiffany blue directional light */
+            directionalLight.position.set(2, 5, 3).normalize();
+            scene.add(directionalLight);
+            const pointLight = new THREE.PointLight(0x4DE3E3, 0.5, 50); /* Lighter teal point light */
+            pointLight.position.set(-5, 5, -5);
+            scene.add(pointLight);
+
+            // Create a futuristic object (Dodecahedron with wireframe overlay)
+            const geometry = new THREE.DodecahedronGeometry(1.5, 0); // Radius, detail (0 for smooth)
+            const material = new THREE.MeshPhongMaterial({
+                color: 0x0ACDCD, /* Tiffany blue base */
+                emissive: 0x056A6A, /* Subtle Tiffany blue self-illumination */
+                specular: 0x444444, // Specular highlights
+                shininess: 150,
+                transparent: true,
+                opacity: 0.8,
+            });
+            const mesh = new THREE.Mesh(geometry, material);
+            scene.add(mesh);
+
+            // Add a wireframe overlay for more tech look
+            const wireframeGeometry = new THREE.WireframeGeometry(geometry);
+            const wireframeMaterial = new THREE.LineBasicMaterial({ color: 0x0ACDCD, linewidth: 2 }); /* Tiffany blue wireframe */
+            const wireframe = new THREE.LineSegments(wireframeGeometry, wireframeMaterial);
+            mesh.add(wireframe); // Add wireframe as a child of the mesh
+
+            camera.position.z = 5;
+
+            // Animation loop
+            const animate = () => {
+                requestAnimationFrame(animate);
+                mesh.rotation.x += 0.002;
+                mesh.rotation.y += 0.003;
+                renderer.render(scene, camera);
+            };
+
+            // Handle window resize (debounced for performance)
+            let resizeTimeout;
+            const onWindowResize = () => {
+                clearTimeout(resizeTimeout);
+                resizeTimeout = setTimeout(() => {
+                    camera.aspect = canvas.clientWidth / canvas.clientHeight;
+                    camera.updateProjectionMatrix();
+                    renderer.setSize(canvas.clientWidth, canvas.clientHeight);
+                }, 100); // Debounce by 100ms
+            };
+            window.addEventListener('resize', onWindowResize);
+
+            // Mouse interaction for rotating the object
+            let isDragging = false;
+            let previousMousePosition = { x: 0, y: 0 };
+
+            canvas.addEventListener('mousedown', (e) => {
+                isDragging = true;
+                previousMousePosition = { x: e.clientX, y: e.clientY };
+            });
+
+            canvas.addEventListener('mouseup', () => {
+                isDragging = false;
+            });
+
+            canvas.addEventListener('mousemove', (e) => {
+                if (!isDragging) return;
+                const deltaX = e.clientX - previousMousePosition.x;
+                const deltaY = e.clientY - previousMousePosition.y;
+
+                mesh.rotation.y += deltaX * 0.005;
+                mesh.rotation.x += deltaY * 0.005;
+
+                previousMousePosition = { x: e.clientX, y: e.clientY };
+            });
+
+            // Touch interaction for rotating the object
+            canvas.addEventListener('touchstart', (e) => {
+                isDragging = true;
+                previousMousePosition = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+            });
+
+            canvas.addEventListener('touchend', () => {
+                isDragging = false;
+            });
+
+            canvas.addEventListener('touchmove', (e) => {
+                if (!isDragging) return;
+                e.preventDefault(); // Prevent scrolling
+                const deltaX = e.touches[0].clientX - previousMousePosition.x;
+                const deltaY = e.touches[0].clientY - previousMousePosition.y;
+
+                mesh.rotation.y += deltaX * 0.005;
+                mesh.rotation.x += deltaY * 0.005;
+
+                previousMousePosition = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+            });
+
+            animate(); // Start the animation loop
+            onWindowResize(); // Initial resize call to set dimensions
+        };
+
+        // --- AI Lab - Gemini API Integration ---
+        const aiPromptInput = document.getElementById('ai-prompt');
+        const generateButton = document.getElementById('generate-ai-response');
+        const aiOutput = document.getElementById('ai-output');
+        const aiLoading = document.getElementById('ai-loading');
+
+        // Function to simulate typing effect
+        const typeMessage = (element, message, delay = 50) => {
+            element.textContent = '';
+            let i = 0;
+            element.classList.add('typewriter'); // Add typewriter class for blinking caret
+            const interval = setInterval(() => {
+                if (i < message.length) {
+                    element.textContent += message.charAt(i);
+                    i++;
+                } else {
+                    clearInterval(interval);
+                    element.classList.remove('typewriter'); // Remove typewriter class after typing
+                }
+            }, delay);
+        };
+
+        generateButton.addEventListener('click', async () => {
+            const prompt = aiPromptInput.value.trim();
+            if (!prompt) {
+                typeMessage(aiOutput, "Error: Please enter a query for the AI to process.");
+                return;
+            }
+
+            aiOutput.textContent = ""; // Clear previous output
+            aiLoading.classList.remove('hidden'); // Show loading spinner
+            generateButton.disabled = true; // Disable button during generation
+
+            try {
+                // Enhanced prompt for a more sophisticated 2026 AI persona
+                const userPrompt = `You are QuantumNexus AI, a highly advanced, empathetic, and slightly philosophical artificial intelligence from the year 2026. Your purpose is to provide concise, insightful, and forward-looking responses, often with a hint of the broader implications or interconnectedness of technology and society. Respond to the user's query: "${prompt}"`;
+
+                let chatHistory = [];
+                chatHistory.push({ role: "user", parts: [{ text: userPrompt }] });
+
+                const payload = {
+                    contents: chatHistory,
+                };
+
+                const apiKey = ""; // Canvas runtime provides this automatically
+                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                const result = await response.json();
+
+                if (result.candidates && result.candidates.length > 0 &&
+                    result.candidates[0].content && result.candidates[0].content.parts &&
+                    result.candidates[0].content.parts.length > 0) {
+                    const text = result.candidates[0].content.parts[0].text;
+                    typeMessage(aiOutput, text); // Use typing effect
+                } else {
+                    typeMessage(aiOutput, "Error: Could not get a meaningful response from the AI. The signal is unstable.");
+                    console.error("Gemini API response structure unexpected:", result);
+                }
+            } catch (error) {
+                typeMessage(aiOutput, "Connection Error: Failed to reach QuantumNexus AI. Please check your network or try again later. The future awaits...");
+                console.error("Fetch error:", error);
+            } finally {
+                aiLoading.classList.add('hidden'); // Hide loading spinner
+                generateButton.disabled = false; // Re-enable button
+            }
+        });
+
+        // --- Back to Top Button Logic ---
+        const backToTopButton = document.getElementById('back-to-top');
+
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) { // Show button after scrolling down 300px
+                backToTopButton.style.display = 'block';
+            } else {
+                backToTopButton.style.display = 'none';
+            }
+        });
+
+        backToTopButton.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    </script>
+</body>
+</html>
